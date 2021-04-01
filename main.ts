@@ -26,7 +26,7 @@ input.onButtonPressed(Button.A, function () {
                 . # . . .
                 # . # # #
                 . # . . .
-                . . # . .
+                . . # . #
                 `)
             basic.pause(100)
             basic.showLeds(`
@@ -56,16 +56,7 @@ input.onButtonPressed(Button.A, function () {
     }
 })
 input.onButtonPressed(Button.AB, function () {
-    for (let index = 0; index <= 99; index++) {
-        pins.digitalWritePin(DigitalPin.P2, 1)
-        basic.pause(500)
-        pins.digitalWritePin(DigitalPin.P2, 0)
-        basic.pause(500)
-        pins.digitalWritePin(DigitalPin.P2, 1)
-        basic.pause(500)
-        pins.digitalWritePin(DigitalPin.P2, 0)
-        basic.pause(500)
-    }
+    malfun += 1
 })
 input.onButtonPressed(Button.B, function () {
     for (let index = 0; index <= 0; index++) {
@@ -213,15 +204,27 @@ input.onButtonPressed(Button.B, function () {
             `)
     }
 })
-input.onGesture(Gesture.Shake, function () {
-    for (let index = 0; index <= 99; index++) {
-        pins.digitalWritePin(DigitalPin.P1, 0)
-        basic.pause(500)
+let malfun = 0
+basic.forever(function () {
+    if (malfun == 1) {
         pins.digitalWritePin(DigitalPin.P2, 1)
         basic.pause(500)
         pins.digitalWritePin(DigitalPin.P2, 0)
         basic.pause(500)
         pins.digitalWritePin(DigitalPin.P2, 1)
         basic.pause(500)
+        pins.digitalWritePin(DigitalPin.P2, 0)
+        basic.pause(500)
+    } else if (malfun == 2) {
+        basic.pause(500)
+        pins.digitalWritePin(DigitalPin.P1, 1)
+        basic.pause(500)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+        basic.pause(500)
+        pins.digitalWritePin(DigitalPin.P1, 1)
+        basic.pause(500)
+        pins.digitalWritePin(DigitalPin.P1, 0)
+    } else {
+        malfun = 0
     }
 })
